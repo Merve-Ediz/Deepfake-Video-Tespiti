@@ -1,0 +1,46 @@
+# ------------------------------------------------------------
+# Xception training config (compatible with DeepfakeProje/train/train.py)
+# ------------------------------------------------------------
+
+# where to write checkpoints (./logs/checkpoints)
+log_dir: ./logs
+
+# model
+model_name: xception
+
+# dataset
+compression: c23              # FF++ compression level
+train_batchSize: 32 # Bir adımda 32 tane görüntü/video-frame örneği al demektir.
+test_batchSize: 32
+workers: 8 # Veri yükleyicinin “arka planda veri hazırlamak için” kullanacağı işçi sayısıdır.
+frame_num:
+  train: 32
+  test: 32
+resolution: 256
+
+# normalization
+mean: [0.5, 0.5, 0.5] # Normalizasyon için ortalama (mean) değerleridir. 3 tane: RGB kanalları için 
+std:  [0.5, 0.5, 0.5] # Standart sapma normalizasyonudur. Birçok CNN modeli bu ölçekte daha stabil öğrenir.
+
+# data augmentation
+use_data_augmentation: true # Eğitim verisini çeşitlendirmedir. Overfitting’i azaltmaya yardımcı olur. Modeli daha “genel” yapar.
+
+# optimizer
+optimizer:
+  type: adam
+  adam:
+    lr: 0.0002
+    beta1: 0.9 # Beta değerleri standarttır.
+    beta2: 0.999
+    eps: 0.00000001 # epsilon: sayısal stabilite için çok küçük bir sayı seçilir.
+    weight_decay: 0.0005 # Amacı: Ağırlıkların aşırı büyümesini engellemek, Overfitting’i azaltmaktır.
+
+# training
+nEpochs: 10
+manualSeed: 1024 # Deney tekrarlanabilirliği için benzer sonuç üretir.
+
+# evaluation metric to select best checkpoint
+metric_scoring: auc
+
+# device
+cuda: true

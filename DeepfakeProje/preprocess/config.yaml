@@ -1,0 +1,37 @@
+preprocess:
+  # FaceForensics++
+  dataset_name:
+    default: "FaceForensics++"
+
+  # Proje içindeki ham FF++ klasörün yolu:
+  dataset_root_path:
+    default: "./datasets/rgb"
+
+  # FF++ için sıkıştırma seviyesi
+  comp:
+    default: "c23"
+
+  # frame seçme yöntemi
+  mode:
+    default: "fixed_num_frames"   # fixed_num_frames | fixed_stride
+  stride:
+    default: 10                   # fixed_stride seçilirse kullanılır
+  num_frames:
+    default: 32                   # fixed_num_frames seçilirse kullanılır
+
+  # çıktı görüntü boyutu
+  output_res:
+    default: 256
+
+  # landmark modeli (dlib)
+  shape_predictor_path:
+    default: "./dlib_tools/shape_predictor_68_face_landmarks.dat"
+
+  # hangi sahte yöntemleri işleyeceğiz 
+  manipulated_methods:
+    default:
+      - "Deepfakes"
+      - "Face2Face"
+      - "FaceSwap"
+      - "NeuralTextures"
+      - "DeepFakeDetection"
